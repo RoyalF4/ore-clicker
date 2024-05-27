@@ -6,9 +6,10 @@ import AdditionsItem from "./AdditionsItem";
 type AdditionsProps = {
   additions: Addition[];
   dispatch: React.Dispatch<Action>;
+  ore: number;
 };
 
-function Additions({ additions, dispatch }: AdditionsProps) {
+function Additions({ additions, dispatch, ore }: AdditionsProps) {
   return (
     <div className="flex flex-col gap-4">
       {additions.map((addition) => (
@@ -17,6 +18,7 @@ function Additions({ additions, dispatch }: AdditionsProps) {
             addition={addition}
             key={addition.name}
             dispatch={dispatch}
+            ore={ore}
           />
         </Tooltip>
       ))}

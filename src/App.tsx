@@ -8,10 +8,11 @@ export default function App() {
   const [state, dispatch] = useLocalStorage(initialState, "playerData");
 
   const { ore, additions } = state;
+  const increment = getIncrement(additions);
 
   useInterval(() => {
-    dispatch({ type: "increment", payload: getIncrement(additions) });
-  }, 1000);
+    dispatch({ type: "increment", payload: increment / 10 });
+  }, 100);
 
   function handleClick() {
     dispatch({ type: "click" });
@@ -24,7 +25,11 @@ export default function App() {
   return (
     <main className="flex p-4">
       <div className="flex flex-1 flex-col items-center">
-        <p>Ore: {ore}</p>
+        <p>Ore: {Math.floor(ore).toLocaleString()}</p>
+        <p>
+          <img src="/images/ore.png" alt="" className="inline-block w-6" />
+          {`per second: ${increment.toLocaleString()}`}
+        </p>
         <button className=" cursor-pointer" onClick={handleClick}>
           <img
             className="pointer-events-none transition-transform hover:scale-105"
@@ -34,7 +39,7 @@ export default function App() {
         </button>
         <button onClick={handleReset}>Reset</button>
       </div>
-      <Additions additions={additions} dispatch={dispatch} />
+      <Additions additions={additions} ore={ore} dispatch={dispatch} />
     </main>
   );
 }
