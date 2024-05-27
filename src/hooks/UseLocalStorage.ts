@@ -19,13 +19,13 @@ export const initialState: GameState = {
       owned: 0,
     },
     {
-      name: "trucks",
+      name: "truck",
       baseCost: 1500,
       power: 100,
       owned: 0,
     },
     {
-      name: "excavators",
+      name: "excavator",
       baseCost: 150000,
       power: 1000,
       owned: 0,

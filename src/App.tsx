@@ -22,17 +22,19 @@ export default function App() {
   }
 
   return (
-    <main className="flex flex-col items-center">
-      <p>Ore: {ore}</p>
-      <button className=" cursor-pointer" onClick={handleClick}>
-        <img
-          className="pointer-events-none transition-transform hover:scale-105"
-          src="/images/ore.png"
-          alt="chunk of ore"
-        />
-      </button>
+    <main className="flex p-4">
+      <div className="flex flex-1 flex-col items-center">
+        <p>Ore: {ore}</p>
+        <button className=" cursor-pointer" onClick={handleClick}>
+          <img
+            className="pointer-events-none transition-transform hover:scale-105"
+            src="/images/ore.png"
+            alt="chunk of ore"
+          />
+        </button>
+        <button onClick={handleReset}>Reset</button>
+      </div>
       <Additions additions={additions} dispatch={dispatch} />
-      <button onClick={handleReset}>Reset</button>
     </main>
   );
 }

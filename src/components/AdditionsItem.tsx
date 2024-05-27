@@ -1,4 +1,5 @@
 import { Action, Addition } from "../../types";
+import formatName from "../utils/formatName";
 import getCost from "../utils/getCost";
 //import getCost from "../utils/getCost";
 
@@ -16,11 +17,11 @@ function AdditionsItem({ addition, dispatch }: AdditionProps) {
   }
 
   return (
-    <button className="bg-gray-300 p-4" onClick={handleClick}>
+    <button className="w-80 bg-gray-300 p-4" onClick={handleClick}>
       <div>
-        <p className="capitalize">{name.split("-").join(" ")}</p>
+        <p className="capitalize">{formatName(name)}</p>
         <p>Power: {power}</p>
-        <p className="flex">
+        <p className="flex justify-center">
           <img src="/images/ore.png" alt="" className="w-6" /> {cost}
         </p>
       </div>
