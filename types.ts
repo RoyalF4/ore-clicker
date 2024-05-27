@@ -1,5 +1,7 @@
 export type GameState = {
   ore: number;
+  totalOre: number;
+  clicks: number;
   additions: Addition[];
 };
 

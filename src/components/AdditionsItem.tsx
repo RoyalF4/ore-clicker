@@ -12,7 +12,7 @@ type AdditionProps = {
 function AdditionsItem({ addition, dispatch, ore }: AdditionProps) {
   const { name, baseCost, owned } = addition;
   const cost = getCost(baseCost, owned);
-  const canAfford = ore > cost;
+  const canAfford = ore >= cost;
 
   function handleClick() {
     dispatch({ type: "purchaseAddition", payload: { cost, name } });
@@ -20,8 +20,9 @@ function AdditionsItem({ addition, dispatch, ore }: AdditionProps) {
 
   return (
     <button
-      className={`w-80 bg-gray-300 p-4 ${canAfford ? "" : "opacity-50"} flex items-center justify-between`}
+      className={`w-80 bg-gray-300 p-4 hover:bg-gray-400 ${canAfford ? "" : "cursor-not-allowed opacity-50"} flex items-center justify-between transition-colors`}
       onClick={handleClick}
+      disabled={!canAfford}
     >
       <div>
         <p className="text-2xl capitalize">{formatName(name)}</p>

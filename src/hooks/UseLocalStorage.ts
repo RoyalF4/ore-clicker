@@ -5,6 +5,8 @@ import { GameState, Action } from "../../types";
 
 export const initialState: GameState = {
   ore: 0,
+  totalOre: 0,
+  clicks: 0,
   additions: [
     {
       name: "miner",
@@ -42,18 +44,28 @@ export const initialState: GameState = {
 function reducer(state: GameState, action: Action) {
   switch (action.type) {
     case "click": {
-      return { ...state, ore: state.ore + 1 };
+      return {
+        ...state,
+        ore: state.ore + 1,
+        clicks: state.clicks + 1,
+        totalOre: state.totalOre + 1,
+      };
     }
     case "reset": {
       return { ...initialState };
     }
     case "increment": {
-      return { ...state, ore: state.ore + action.payload };
+      if (action.payload === 0) return { ...state };
+      return {
+        ...state,
+        ore: Number((state.ore + action.payload).toFixed(2)),
+        totalOre: Number((state.ore + action.payload).toFixed(2)),
+      };
     }
     case "purchaseAddition": {
       const { name, cost } = action.payload;
       // check if user has enough ore to purchase addition
-      return state.ore > cost
+      return state.ore >= cost
         ? {
             ...state,
             ore: state.ore - cost,

@@ -11,7 +11,10 @@ export default function App() {
   const increment = getIncrement(additions);
 
   useInterval(() => {
-    dispatch({ type: "increment", payload: increment / 10 });
+    dispatch({
+      type: "increment",
+      payload: increment / 10,
+    });
   }, 100);
 
   function handleClick() {
@@ -30,9 +33,12 @@ export default function App() {
           <img src="/images/ore.png" alt="" className="inline-block w-6" />
           {`per second: ${increment.toLocaleString()}`}
         </p>
-        <button className=" cursor-pointer" onClick={handleClick}>
+        <button
+          className=" pointer-pointer transition-transform hover:scale-105 active:scale-100"
+          onClick={handleClick}
+        >
           <img
-            className="pointer-events-none transition-transform hover:scale-105"
+            className="pointer-events-none"
             src="/images/ore.png"
             alt="chunk of ore"
           />
