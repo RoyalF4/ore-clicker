@@ -1,5 +1,6 @@
 import { useReducer, useEffect } from "react";
 import { GameState, Action } from "../../types";
+import { faHandPointer } from "@fortawesome/free-solid-svg-icons/faHandPointer";
 
 // 15, 18, 20, 23, 27, 31, 35, 40, 46, 53
 
@@ -39,16 +40,46 @@ export const initialState: GameState = {
       owned: 0,
     },
   ],
+  upgrades: [
+    {
+      name: "cursor upgrade 1",
+      cost: 100,
+      multiplier: 2,
+      purchased: false,
+      icon: faHandPointer,
+      color: "white",
+    },
+    {
+      name: "cursor upgrade 2",
+      cost: 1000,
+      multiplier: 2,
+      purchased: false,
+      icon: faHandPointer,
+      color: "hotpink",
+    },
+    {
+      name: "cursor upgrade 3",
+      cost: 10000,
+      multiplier: 2,
+      purchased: false,
+      icon: faHandPointer,
+      color: "cyan",
+    },
+  ],
 };
 
 function reducer(state: GameState, action: Action) {
   switch (action.type) {
     case "click": {
+      const clickPower = state.upgrades.reduce(
+        (power, cur) => (cur.purchased ? cur.multiplier * power : power),
+        1,
+      );
       return {
         ...state,
-        ore: state.ore + 1,
+        ore: state.ore + clickPower,
         clicks: state.clicks + 1,
-        totalOre: state.totalOre + 1,
+        totalOre: state.totalOre + clickPower,
       };
     }
     case "reset": {
@@ -73,6 +104,20 @@ function reducer(state: GameState, action: Action) {
               addition.name === name
                 ? { ...addition, owned: addition.owned + 1 }
                 : { ...addition },
+            ),
+          }
+        : { ...state };
+    }
+    case "purchaseUpgrade": {
+      const { name, cost } = action.payload;
+      return state.ore >= cost
+        ? {
+            ...state,
+            ore: state.ore - cost,
+            upgrades: state.upgrades.map((upgrade) =>
+              upgrade.name === name
+                ? { ...upgrade, purchased: true }
+                : { ...upgrade },
             ),
           }
         : { ...state };

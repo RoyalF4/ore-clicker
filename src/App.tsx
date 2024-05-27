@@ -1,4 +1,5 @@
 import Additions from "./components/Additions.tsx";
+import Upgrades from "./components/Upgrades.tsx";
 import useInterval from "./hooks/UseInterval.ts";
 import useLocalStorage from "./hooks/UseLocalStorage.ts";
 import { initialState } from "./hooks/UseLocalStorage.ts";
@@ -7,7 +8,7 @@ import getIncrement from "./utils/getIncrement.ts";
 export default function App() {
   const [state, dispatch] = useLocalStorage(initialState, "playerData");
 
-  const { ore, additions } = state;
+  const { ore, additions, upgrades } = state;
   const increment = getIncrement(additions);
 
   useInterval(() => {
@@ -45,7 +46,11 @@ export default function App() {
         </button>
         <button onClick={handleReset}>Reset</button>
       </div>
-      <Additions additions={additions} ore={ore} dispatch={dispatch} />
+      <div>
+        <h2 className="text-center text-4xl">Store</h2>
+        <Upgrades upgrades={upgrades} ore={ore} dispatch={dispatch} />
+        <Additions additions={additions} ore={ore} dispatch={dispatch} />
+      </div>
     </main>
   );
 }

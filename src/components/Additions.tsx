@@ -12,7 +12,7 @@ type AdditionsProps = {
 function Additions({ additions, dispatch, ore }: AdditionsProps) {
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-3xl">Additions</h2>
+      <h3 className="text-2xl font-bold">Additions</h3>
       {additions.map((addition) => (
         <Tooltip addition={addition} key={addition.name}>
           <AdditionsItem
