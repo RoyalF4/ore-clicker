@@ -1,5 +1,5 @@
-const MULTIPLIER = 2;
+const MULTIPLIER = 1.2;
 
 export default function getCost(baseCost: number, owned: number) {
-  return baseCost * Math.pow(MULTIPLIER, owned);
+  return Math.floor(baseCost * Math.pow(MULTIPLIER, owned));
 }

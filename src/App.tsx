@@ -1,34 +1,17 @@
-import { useReducer } from "react";
-
-// import useInterval from "./hooks/UseInterval";
-// import Additions from "./components/Additions";
-
-import { GameState, Action } from "../types.ts";
-
-const initialState: GameState = {
-  ore: 0,
-  additions: [],
-};
-
-function reducer(state: GameState, action: Action) {
-  switch (action.type) {
-    case "click": {
-      return { ...state, ore: state.ore + 1 };
-    }
-    case "reset": {
-      return { ...initialState };
-    }
-  }
-}
+import Additions from "./components/Additions.tsx";
+import useInterval from "./hooks/UseInterval.ts";
+import useLocalStorage from "./hooks/UseLocalStorage.ts";
+import { initialState } from "./hooks/UseLocalStorage.ts";
+import getIncrement from "./utils/getIncrement.ts";
 
 export default function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useLocalStorage(initialState, "playerData");
 
-  const { ore } = state;
+  const { ore, additions } = state;
 
-  // useInterval(() => {
-  //   setOre((ore) => ore + 1);
-  // }, 1000);
+  useInterval(() => {
+    dispatch({ type: "increment", payload: getIncrement(additions) });
+  }, 1000);
 
   function handleClick() {
     dispatch({ type: "click" });
@@ -48,8 +31,8 @@ export default function App() {
           alt="chunk of ore"
         />
       </button>
+      <Additions additions={additions} dispatch={dispatch} />
       <button onClick={handleReset}>Reset</button>
-      {/* <Additions additions={additions} /> */}
     </main>
   );
 }
