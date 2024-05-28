@@ -6,6 +6,9 @@ export default {
       backgroundImage: {
         ore: "url('/images/Ore.png')",
       },
+      spacing: {
+        "84rem": "84rem",
+      },
     },
   },
   plugins: [],

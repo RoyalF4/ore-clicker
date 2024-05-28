@@ -48,6 +48,7 @@ export const initialState: GameState = {
       purchased: false,
       icon: faHandPointer,
       color: "white",
+      description: "Gives clicks a 2x multiplier.",
     },
     {
       name: "cursor upgrade 2",
@@ -56,6 +57,7 @@ export const initialState: GameState = {
       purchased: false,
       icon: faHandPointer,
       color: "hotpink",
+      description: "Gives clicks a 2x multiplier.",
     },
     {
       name: "cursor upgrade 3",
@@ -64,6 +66,7 @@ export const initialState: GameState = {
       purchased: false,
       icon: faHandPointer,
       color: "cyan",
+      description: "Gives clicks a 2x multiplier.",
     },
   ],
 };

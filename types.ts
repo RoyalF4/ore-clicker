@@ -22,6 +22,7 @@ export type Upgrade = {
   purchased: boolean;
   icon: IconProp;
   color: string;
+  description: string;
 };
 
 export type Action =
