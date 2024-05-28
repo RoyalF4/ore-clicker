@@ -13,9 +13,11 @@ export type Addition = {
   baseCost: number;
   power: number;
   owned: number;
+  multiplier: number;
 };
 
 export type Upgrade = {
+  type: string;
   name: string;
   cost: number;
   multiplier: number;
@@ -30,4 +32,8 @@ export type Action =
   | { type: "reset" }
   | { type: "increment"; payload: number }
   | { type: "purchaseAddition"; payload: { cost: number; name: string } }
-  | { type: "purchaseUpgrade"; payload: { name: string; cost: number } };
+  | { type: "purchaseClickUpgrade"; payload: { name: string; cost: number } }
+  | {
+      type: "purchaseAdditionUpgrade";
+      payload: { name: string; cost: number; type: string; multiplier: number };
+    };

@@ -8,18 +8,23 @@ type UpgradeProps = {
 };
 
 function UpgradeItem({ upgrade, ore, dispatch }: UpgradeProps) {
-  const { name, icon, color, cost, purchased } = upgrade;
+  const { type, name, icon, color, cost, multiplier } = upgrade;
   const canAfford = ore >= cost;
 
-  if (purchased) return;
-
   function handleClick() {
-    dispatch({ type: "purchaseUpgrade", payload: { name, cost } });
+    if (type === "click") {
+      dispatch({ type: "purchaseClickUpgrade", payload: { name, cost } });
+    } else {
+      dispatch({
+        type: "purchaseAdditionUpgrade",
+        payload: { name, cost, type, multiplier },
+      });
+    }
   }
 
   return (
     <button
-      className={`h-10 w-10 border-2 border-black bg-gray-600 p-1 ${canAfford ? "" : "cursor-not-allowed opacity-50"}`}
+      className={`h-10 w-10 border-2 border-black bg-gray-800 p-1 ${canAfford ? "" : "cursor-not-allowed opacity-50"}`}
       disabled={!canAfford}
       onClick={handleClick}
     >

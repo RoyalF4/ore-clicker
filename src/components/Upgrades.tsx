@@ -9,20 +9,24 @@ type UpgradesProps = {
 };
 
 function Upgrades({ upgrades, ore, dispatch }: UpgradesProps) {
+  const availableUpgrades = upgrades.filter((upgrade) => !upgrade.purchased);
+
   return (
     <div>
       <h3 className="text-2xl font-bold">Upgrades</h3>
       <div className="flex gap-2">
-        {upgrades.map((upgrade) => (
-          <UpgradeTooltip upgrade={upgrade} ore={ore} key={upgrade.name}>
-            <UpgradeItem
-              upgrade={upgrade}
-              ore={ore}
-              dispatch={dispatch}
-              key={upgrade.name}
-            />
-          </UpgradeTooltip>
-        ))}
+        {availableUpgrades
+          .sort((a, b) => a.cost - b.cost)
+          .map((upgrade) => (
+            <UpgradeTooltip upgrade={upgrade} ore={ore} key={upgrade.name}>
+              <UpgradeItem
+                upgrade={upgrade}
+                ore={ore}
+                dispatch={dispatch}
+                key={upgrade.name}
+              />
+            </UpgradeTooltip>
+          ))}
       </div>
     </div>
   );

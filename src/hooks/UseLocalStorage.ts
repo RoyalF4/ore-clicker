@@ -1,6 +1,7 @@
 import { useReducer, useEffect } from "react";
 import { GameState, Action } from "../../types";
 import { faHandPointer } from "@fortawesome/free-solid-svg-icons/faHandPointer";
+import { faPersonDigging } from "@fortawesome/free-solid-svg-icons/faPersonDigging";
 
 // 15, 18, 20, 23, 27, 31, 35, 40, 46, 53
 
@@ -14,34 +15,40 @@ export const initialState: GameState = {
       baseCost: 15,
       power: 1,
       owned: 0,
+      multiplier: 1,
     },
     {
       name: "minecart",
       baseCost: 150,
       power: 10,
       owned: 0,
+      multiplier: 1,
     },
     {
       name: "truck",
       baseCost: 1500,
       power: 100,
       owned: 0,
+      multiplier: 1,
     },
     {
       name: "excavator",
       baseCost: 150000,
       power: 1000,
       owned: 0,
+      multiplier: 1,
     },
     {
       name: "processing-plant",
       baseCost: 1500000,
       power: 10000,
       owned: 0,
+      multiplier: 1,
     },
   ],
   upgrades: [
     {
+      type: "click",
       name: "cursor upgrade 1",
       cost: 100,
       multiplier: 2,
@@ -51,6 +58,7 @@ export const initialState: GameState = {
       description: "Gives clicks a 2x multiplier.",
     },
     {
+      type: "click",
       name: "cursor upgrade 2",
       cost: 1000,
       multiplier: 2,
@@ -60,6 +68,7 @@ export const initialState: GameState = {
       description: "Gives clicks a 2x multiplier.",
     },
     {
+      type: "click",
       name: "cursor upgrade 3",
       cost: 10000,
       multiplier: 2,
@@ -67,6 +76,26 @@ export const initialState: GameState = {
       icon: faHandPointer,
       color: "cyan",
       description: "Gives clicks a 2x multiplier.",
+    },
+    {
+      type: "miner",
+      name: "miner upgrade 1",
+      cost: 7500,
+      multiplier: 2,
+      purchased: false,
+      icon: faPersonDigging,
+      color: "green",
+      description: "Makes miners twice as efficient.",
+    },
+    {
+      type: "miner",
+      name: "miner upgrade 2",
+      cost: 50000,
+      multiplier: 2,
+      purchased: false,
+      icon: faPersonDigging,
+      color: "red",
+      description: "Makes miners twice as efficient.",
     },
   ],
 };
@@ -111,7 +140,7 @@ function reducer(state: GameState, action: Action) {
           }
         : { ...state };
     }
-    case "purchaseUpgrade": {
+    case "purchaseClickUpgrade": {
       const { name, cost } = action.payload;
       return state.ore >= cost
         ? {
@@ -121,6 +150,25 @@ function reducer(state: GameState, action: Action) {
               upgrade.name === name
                 ? { ...upgrade, purchased: true }
                 : { ...upgrade },
+            ),
+          }
+        : { ...state };
+    }
+    case "purchaseAdditionUpgrade": {
+      const { name, cost, type, multiplier } = action.payload;
+      return state.ore >= cost
+        ? {
+            ...state,
+            ore: state.ore - cost,
+            upgrades: state.upgrades.map((upgrade) =>
+              upgrade.name === name
+                ? { ...upgrade, purchased: true }
+                : { ...upgrade },
+            ),
+            additions: state.additions.map((addition) =>
+              addition.name === type
+                ? { ...addition, multiplier: addition.multiplier * multiplier }
+                : { ...addition },
             ),
           }
         : { ...state };
