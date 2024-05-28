@@ -34,7 +34,7 @@ export default function App() {
         <p>Ore: {Math.floor(ore).toLocaleString()}</p>
         <p>
           <img src="/images/ore.png" alt="" className="inline-block w-6" />
-          {`per second: ${increment.toLocaleString()}`}
+          {`per second: ${(increment * 10).toLocaleString()}`}
         </p>
         <button
           className=" pointer-pointer transition-transform hover:scale-105 active:scale-100"
