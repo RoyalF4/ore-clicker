@@ -9,7 +9,9 @@ type UpgradesProps = {
 };
 
 function Upgrades({ upgrades, ore, dispatch }: UpgradesProps) {
-  const availableUpgrades = upgrades.filter((upgrade) => !upgrade.purchased);
+  const availableUpgrades = upgrades
+    .filter((upgrade) => !upgrade.purchased)
+    .slice(0, 6);
 
   return (
     <div>

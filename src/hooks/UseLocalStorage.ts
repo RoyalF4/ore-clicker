@@ -2,6 +2,7 @@ import { useReducer, useEffect } from "react";
 import { GameState, Action } from "../../types";
 import { faHandPointer } from "@fortawesome/free-solid-svg-icons/faHandPointer";
 import { faPersonDigging } from "@fortawesome/free-solid-svg-icons/faPersonDigging";
+import { faCartFlatbed } from "@fortawesome/free-solid-svg-icons";
 
 // 15, 18, 20, 23, 27, 31, 35, 40, 46, 53
 
@@ -54,7 +55,7 @@ export const initialState: GameState = {
       multiplier: 2,
       purchased: false,
       icon: faHandPointer,
-      color: "white",
+      color: "green",
       description: "Gives clicks a 2x multiplier.",
     },
     {
@@ -64,7 +65,7 @@ export const initialState: GameState = {
       multiplier: 2,
       purchased: false,
       icon: faHandPointer,
-      color: "hotpink",
+      color: "yellow",
       description: "Gives clicks a 2x multiplier.",
     },
     {
@@ -74,7 +75,7 @@ export const initialState: GameState = {
       multiplier: 2,
       purchased: false,
       icon: faHandPointer,
-      color: "cyan",
+      color: "red",
       description: "Gives clicks a 2x multiplier.",
     },
     {
@@ -94,8 +95,28 @@ export const initialState: GameState = {
       multiplier: 2,
       purchased: false,
       icon: faPersonDigging,
-      color: "red",
+      color: "yellow",
       description: "Makes miners twice as efficient.",
+    },
+    {
+      type: "minecart",
+      name: "minecart upgrade 1",
+      cost: 25000,
+      multiplier: 2,
+      purchased: false,
+      icon: faCartFlatbed,
+      color: "green",
+      description: "Makes minecarts twice as efficient.",
+    },
+    {
+      type: "minecart",
+      name: "minecart upgrade 2",
+      cost: 100000,
+      multiplier: 2,
+      purchased: false,
+      icon: faCartFlatbed,
+      color: "yellow",
+      description: "Makes minecarts twice as efficient.",
     },
   ],
 };
