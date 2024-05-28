@@ -5,18 +5,20 @@ import useLocalStorage from "./hooks/UseLocalStorage.ts";
 import { initialState } from "./hooks/UseLocalStorage.ts";
 import getIncrement from "./utils/getIncrement.ts";
 
+const GAME_INTERVAL = 100;
+
 export default function App() {
   const [state, dispatch] = useLocalStorage(initialState, "playerData");
 
   const { ore, additions, upgrades } = state;
-  const increment = getIncrement(additions);
+  const increment = getIncrement(additions, GAME_INTERVAL);
 
   useInterval(() => {
     dispatch({
       type: "increment",
-      payload: increment / 10,
+      payload: increment,
     });
-  }, 100);
+  }, GAME_INTERVAL);
 
   function handleClick() {
     dispatch({ type: "click" });
