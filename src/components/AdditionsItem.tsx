@@ -1,5 +1,6 @@
 import { Action, Addition } from "../../types";
 import formatName from "../utils/formatName";
+import formatNumber from "../utils/formatNumber";
 import getCost from "../utils/getCost";
 //import getCost from "../utils/getCost";
 
@@ -29,7 +30,7 @@ function AdditionsItem({ addition, dispatch, ore }: AdditionProps) {
         <p className="flex">
           <img src="/images/ore.png" alt="" className="w-6" />{" "}
           <span className={`${canAfford ? "text-green-500" : "text-red-500"}`}>
-            {cost.toLocaleString()}
+            {formatNumber(cost)}
           </span>
         </p>
       </div>

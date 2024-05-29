@@ -37,7 +37,7 @@ export default function App() {
           {formatNumber(ore)}
           <img src="/images/ore.png" alt="" className="inline-block w-6" />
         </p>
-        <p>{`per second: ${(increment * 10).toLocaleString()}`}</p>
+        <p>{`per second: ${formatNumber(increment * 10)}`}</p>
         <button
           className=" pointer-pointer transition-transform hover:scale-105 active:scale-100"
           onClick={handleClick}
