@@ -3,6 +3,7 @@ import Upgrades from "./components/Upgrades.tsx";
 import useInterval from "./hooks/UseInterval.ts";
 import useLocalStorage from "./hooks/UseLocalStorage.ts";
 import { initialState } from "./hooks/UseLocalStorage.ts";
+import formatNumber from "./utils/formatNumber.ts";
 import getIncrement from "./utils/getIncrement.ts";
 
 const GAME_INTERVAL = 100;
@@ -31,11 +32,12 @@ export default function App() {
   return (
     <main className="flex p-4">
       <div className="flex flex-1 flex-col items-center">
-        <p>Ore: {Math.floor(ore).toLocaleString()}</p>
-        <p>
+        <p className="flex">
+          {/* {Math.floor(ore).toLocaleString()} */}
+          {formatNumber(ore)}
           <img src="/images/ore.png" alt="" className="inline-block w-6" />
-          {`per second: ${(increment * 10).toLocaleString()}`}
         </p>
+        <p>{`per second: ${(increment * 10).toLocaleString()}`}</p>
         <button
           className=" pointer-pointer transition-transform hover:scale-105 active:scale-100"
           onClick={handleClick}

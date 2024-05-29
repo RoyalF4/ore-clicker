@@ -7,7 +7,10 @@ type TooltipProps = {
 };
 
 function Tooltip({ children, addition }: TooltipProps) {
-  const { name, owned, power } = addition;
+  const { name, owned, power, multiplier } = addition;
+
+  const totalPower = power * multiplier;
+
   return (
     <div className="group relative">
       {children}
@@ -18,13 +21,13 @@ function Tooltip({ children, addition }: TooltipProps) {
         </p>
         <ul className="list-inside list-disc text-xs">
           <li>
-            Each {formatName(name)} produces {power.toLocaleString()} ore per
-            second
+            Each {formatName(name)} produces {totalPower.toLocaleString()} ore
+            per second
           </li>
           <li>
             {owned.toLocaleString()}{" "}
             {`${formatName(name)}${owned === 1 ? "" : "s"}`} producing{" "}
-            {power.toLocaleString()} ore per second
+            {(totalPower * owned).toLocaleString()} ore per second
           </li>
         </ul>
       </div>
